@@ -1,6 +1,6 @@
-# React Starter
+# To do App 
 
-> This repo contains boilerplate code to aid in the creation of a new React app with Redux. Follow the below setup instructions to get started.
+> To do app built using ReactJs
 
 ### Setup Instructions
 
