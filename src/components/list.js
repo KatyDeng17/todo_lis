@@ -10,7 +10,21 @@ const  List = props => {
   console.log('List Data: ', props.data);
   // const listElements = ListData.map((item, index)=> {
     const listElements = props.data.map((item, index)=> {
-       return <li className="collection-item" key = {index}> {item.title} </li>
+       return (
+          <li className="collection-item" key = {index}> 
+          <div className="col s10">
+          {item.title} 
+          </div>
+          <div className ="col s2 right-align">
+             <button onClick={()=>{
+                 props.delete(index)
+               
+             }} 
+                className = "btn red darken-2">delete
+                </button>
+          </div>
+          </li>
+        )
     })
   return (
       <ul className ="collection">

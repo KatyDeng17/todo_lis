@@ -12,6 +12,11 @@ class AddItem extends Component {
     event.preventDefault();
     console.log("Item: ", this.state);
     this.props.add(this.state)
+    //clearning the form
+    this.setState({
+      title: '',
+      details: ''
+    })
   }
 
    render(){
