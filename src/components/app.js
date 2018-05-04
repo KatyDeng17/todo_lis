@@ -10,29 +10,36 @@ class App extends Component{
     constructor(props){
         super(props);
         this.state = {
-            listData: []
+            listData: [] //this.state is a object with a key as listData and [] as value; 
         };
     }
     componentDidMount(){
-        this.getListData();
+        // this.getListData();
+        this.getListData = setTimeout(()=>{
+            this.setState({listData: ListData})
+        },800);
+
     }
+        // getListData(){
+    //     setTimeout(()=>{
+    //         this.setState({listData: ListData })
+    //     },500);
+       
+    // }
+
+
     AddItem(item){
         this.setState({
             listData: [item, ...this.state.listData]
         })
     }
      
-    getListData(){
-        setTimeout(()=>{
-            this.setState({listData: ListData })
-        },500);
-       
-    }
+
     render (){
         return(
         <div className = "container" >
             <h1 className = "center" > To Do List </h1>
-            <AddItem add ={this.AddItem.bind(this)}/>
+            <AddItem add = {this.AddItem.bind(this)}/>
             <List data={this.state.listData}/>
         </div>
         );
