@@ -5,6 +5,10 @@ import List from './list';
 import AddItem from './add-item';
 // import logo from '../assets/images/logo.svg';
 import ListData from '../helpers/list_data';
+import axios from 'axios';
+
+const BASE_URL = 'http://api.reactprototypes.com'
+const API_KEY = '?key=kahahaheho1234';
 
 class App extends Component{
     constructor(props){
@@ -14,10 +18,10 @@ class App extends Component{
         };
     }
     componentDidMount(){
-        // this.getListData();
-        this.getListData = setTimeout(()=>{
-            this.setState({listData: ListData})
-        },800);
+        this.getListData();
+        // this.getListData = setTimeout(()=>{
+        //     this.setState({listData: ListData})
+        // },800);
 
     }
         // getListData(){
@@ -26,18 +30,54 @@ class App extends Component{
     //     },500);
        
     // }
+//async is the new JS syntex
+   async getListData(){
+       try{
+        // const response = await axios.get(`${asBASE_URL}/todos${API_KEY}`) this will show error
 
-
-    AddItem(item){
+        const response = await axios.get(`${BASE_URL}/todos${API_KEY}`)
+        console.log(response.data.todos);
         this.setState({
-            listData: [item, ...this.state.listData]
-        })
+            listData: response.data.todos
+       });
+       }catch(err){
+           console.log('ERROR: ', err.message);
+       }
+       
+
+    }
+/****************************************** 
+        // axios.get(`${BASE_URL}/todos${API_KEY}`)
+        //     .then((resp)=>{
+        //         console.log(resp.data.todos);
+        //         this.setState({
+        //             listData: resp.data.todos
+        //         });
+        //     })
+       
+*////////////////////////////////////////////////       
+
+
+    async AddItem(item){
+          await axios.post(`${BASE_URL}/todos/${API_KEY}`,item)
+          this.getListData();
+        // this.setState({
+        //     listData: [item, ...this.state.listData]
+        // })
     }
      
-    deleteItem(index){
-        const listData = this.state.listData.slice()
-        listData.splice(index,1);
-        this.setState({ listData: listData })
+   async deleteItem(id){
+        // const listData = this.state.listData.slice()
+        // listData.splice(index,1);
+        // this.setState({ listData: listData })
+      try{
+          // know which item we are going to delete; 
+        await axios.delete(`${BASE_URL}/todos/${id + API_KEY}`)
+        this.getListData();
+      }catch(err){
+
+      }
+
     }
     render (){
         return(

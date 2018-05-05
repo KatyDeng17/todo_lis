@@ -17,9 +17,7 @@ const  List = props => {
           </div>
           <div className ="col s2 right-align">
              <button onClick={()=>{
-                 props.delete(index)
-               
-             }} 
+                 props.delete(item._id)}} 
                 className = "btn red darken-2">delete
                 </button>
           </div>
